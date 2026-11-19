@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>표승연 | Portfolio</title>
+  <style>
+    /* ==========================================================================
+       1. CSS 변수 및 에디토리얼 컬러 시스템 정의
+       - 웜 화이트 메인 배경, 소프트 베이지 보조 배경, 차콜 블랙 텍스트, 토프 브라운 포인트
+       ========================================================================== */
+    :root {
+      --bg-main: #FAF9F6;        /* 메인 배경: 웜 화이트 / 아이보리 */
+      --bg-sub: #F2EFE9;         /* 보조 배경: 부드러운 베이지 / 라이트 그레이 */
+      --bg-card: #FFFFFF;        /* 카드 및 컨테이너 배경 */
+      --text-primary: #1F1E1C;   /* 주요 글자: 차콜 블랙 */
+      --text-secondary: #5C5852; /* 보조 글자: 딥 그레이 */
+      --text-muted: #8C867E;     /* 캡션 및 비활성 텍스트 */
+      --accent: #7A6652;         /* 포인트 색상: 차분한 브라운 / 토프 베이지 */
+      --accent-hover: #5E4E3E;   /* 포인트 호버 색상 */
+      --border-color: #E4DFD7;   /* 정돈된 1px 헤어라인 보더 */
+      
+      --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      --font-serif: "Playfair Display", "Times New Roman", Georgia, serif;
+      
+      --container-max: 1160px;
+      --section-padding: 120px 0;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* ==========================================================================
+       2. 기본 리셋 및 타이포그래피
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      letter-spacing: -0.02em;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: 90%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    /* 섹션 공통 헤더 스타일 */
+    .section {
+      padding: var(--section-padding);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 64px;
+    }
+
+    .section-index {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+    }
+
+    /* 공통 버튼 스타일 (동일한 디자인 시스템 유지) */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 28px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border-radius: 4px;
+      border: 1px solid var(--text-primary);
+      background-color: transparent;
+      color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      background-color: var(--text-primary);
+      color: var(--bg-main);
+    }
+
+    .btn-accent {
+      border-color: var(--accent);
+      background-color: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .btn-accent:hover {
+      border-color: var(--accent-hover);
+      background-color: var(--accent-hover);
+      color: #FFFFFF;
+    }
+
+    /* ==========================================================================
+       3. 네비게이션 바 (Header)
+       ========================================================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 76px;
+      background-color: rgba(250, 249, 246, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .logo {
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text-primary);
+    }
+
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-link {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      padding: 6px 0;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--accent);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-primary);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* 모바일 메뉴 토글 버튼 */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background-color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    /* ==========================================================================
+       4. MAIN (메인 히어로 섹션)
+       ========================================================================== */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding-top: 76px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-content {
+      max-width: 820px;
+      padding: 60px 0;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 7vw, 5.25rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: var(--text-primary);
+      margin-bottom: 28px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* ==========================================================================
+       5. ABOUT (자기소개 섹션)
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .about-lead {
+      font-size: 1.375rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--text-primary);
+      word-break: keep-all;
+    }
+
+    .about-details {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .about-block {
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .about-block:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .about-block-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .about-block-text {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      word-break: keep-all;
+    }
+
+    /* 편집 가능 안내 뱃지 (추후 개인 정보 보완용) */
+    .editable-hint {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background-color: var(--bg-sub);
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-top: 8px;
+    }
+
+    /* ==========================================================================
+       6. PROJECT (프로젝트 갤러리 섹션)
+       - 사진이 잘리거나 찌그러지지 않고 원본 비율 그대로 크게 보이도록 설계
+       - 이미지 파일 교체 및 프로젝트 추가 확장 용이
+       ========================================================================== */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 96px;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* 작품 이미지 컨테이너: 잘림 방지(object-fit: contain) 및 깔끔한 프레임 */
+    .project-media {
+      background-color: var(--bg-sub);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .project-media:hover {
+      border-color: var(--accent);
+    }
+
+    /* 실제 이미지가 들어갈 때 원본 비율을 100% 유지하며 전체 표시 */
+    .project-img {
+      width: 100%;
+      height: auto;
+      max-height: 620px;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+
+    /* 이미지가 아직 연결되지 않았을 때 표시되는 깔끔한 플레이스홀더 영역 */
+    .project-placeholder {
+      width: 100%;
+      min-height: 350px;
+      border: 1px dashed var(--accent);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 32px 20px;
+      color: var(--text-secondary);
+      gap: 12px;
+    }
+
+    .project-placeholder-label {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .project-placeholder-path {
+      font-family: monospace;
+      font-size: 0.8125rem;
+      color: var(--accent);
+      background-color: var(--bg-main);
+      padding: 4px 10px;
+      border-radius: 3px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* 로컬에서 바로 사진을 올려 미리 확인할 수 있는 유틸리티 버튼 */
+    .preview-upload-btn {
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-main);
+      padding: 6px 14px;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .preview-upload-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    /* 프로젝트 텍스트 정보 영역 (사진을 방해하지 않도록 우측에 정돈) */
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 8px;
+    }
+
+    .project-num {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    .project-title {
+      font-size: 1.625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .project-desc {
+      font-size: 0.975rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      word-break: keep-all;
+    }
+
+    .project-meta {
+      margin-top: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .project-meta-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .tool-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tool-tag {
+      font-size: 0.8125rem;
+      color: var(--text-primary);
+      background-color: var(--bg-sub);
+      border: 1px solid var(--border-color);
+      padding: 5px 12px;
+      border-radius: 3px;
+    }
+
+    /* ==========================================================================
+       7. SKILLS (활용 기술 섹션)
+       ========================================================================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .skill-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: var(--transition);
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+    }
+
+    .skill-category {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .skill-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .skill-desc {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      word-break: keep-all;
+    }
+
+    /* ==========================================================================
+       8. CONTACT (연락처 섹션)
+       - 확인되지 않은 개인정보는 비워두고 추후 입력 가능한 깔끔한 구조로 제공
+       ========================================================================== */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .contact-intro {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-color);
+      gap: 16px;
+    }
+
+    .contact-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      min-width: 100px;
+    }
+
+    .contact-value {
+      font-size: 1rem;
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    .contact-empty {
+      color: var(--text-muted);
+      font-style: normal;
+      font-size: 0.9375rem;
+    }
+
+    /* ==========================================================================
+       9. FOOTER & TOAST MESSAGE
+       ========================================================================== */
+    .footer {
+      background-color: var(--bg-sub);
+      padding: 48px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    /* 알림 메시지 박스 (alert 대신 사용) */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background-color: var(--text-primary);
+      color: var(--bg-main);
+      padding: 14px 22px;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: var(--transition);
+      z-index: 2000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       10. 반응형 미디어 쿼리 (태블릿 및 모바일 최적화)
+       ========================================================================== */
+    @media (max-width: 960px) {
+      :root {
+        --section-padding: 88px 0;
+      }
+
+      .about-grid,
+      .project-item,
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-media {
+        min-height: 320px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --section-padding: 72px 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-list {
+        position: fixed;
+        top: 76px;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-main);
+        border-bottom: 1px solid var(--border-color);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 5%;
+        gap: 20px;
+        display: none;
+      }
+
+      .nav-list.open {
+        display: flex;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .contact-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       HEADER / NAVIGATION
+       ======================================================================== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#main" class="logo">PYO SEUNGYEON</a>
+
+      <button type="button" class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-list" id="navList">
+          <li><a href="#main" class="nav-link active">MAIN</a></li>
+          <li><a href="#about" class="nav-link">ABOUT</a></li>
+          <li><a href="#project" class="nav-link">PROJECT</a></li>
+          <li><a href="#skills" class="nav-link">SKILLS</a></li>
+          <li><a href="#contact" class="nav-link">CONTACT</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================================================================
+         1. MAIN (메인 히어로 화면)
+         ====================================================================== -->
+    <section id="main" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-eyebrow">Personal Portfolio</span>
+          <h1 class="hero-name">표승연</h1>
+          <p class="hero-subtitle">
+            감각적인 시각 표현과 AI 도구를 탐구하며,<br>
+            아이디어를 정돈된 결과물로 완성해 나가는 포트폴리오입니다.
+          </p>
+          <div class="hero-actions">
+            <a href="#project" class="btn btn-accent">프로젝트 보기</a>
+            <a href="#about" class="btn">자기소개 보기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. ABOUT (자기소개)
+         - 확인되지 않은 학과, 학번, 임의 경력은 배제하고 추후 수정 가능하도록 구성
+         ====================================================================== -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-index">01 / About</span>
+          <h2 class="section-title">자기소개</h2>
+        </div>
+
+        <div class="about-grid">
+          <div>
+            <p class="about-lead">
+              안녕하세요, 표승연입니다.<br>
+              주제의 본질을 담백하게 담아내는 시각 작업과 새로운 디지털 도구의 활용에 관심을 두고 있습니다.
+            </p>
+          </div>
+
+          <div class="about-details">
+            <div class="about-block">
+              <h3 class="about-block-title">소개 및 관심 분야</h3>
+              <p class="about-block-text">
+                시각 디자인과 디지털 콘텐츠 기획에 흥미를 가지고 있으며, 사물과 공간이 가진 고유의 분위기를 시각 언어로 풀어내는 작업을 이어가고 있습니다.
+              </p>
+              <span class="editable-hint">※ 전공 및 세부 소개 문구는 필요에 따라 직접 수정해 주세요.</span>
+            </div>
+
+            <div class="about-block">
+              <h3 class="about-block-title">AI 활용에 대한 생각과 목표</h3>
+              <p class="about-block-text">
+                AI 도구를 단순한 자동화 수단이 아닌, 아이디어를 구체화하고 표현의 폭을 넓히는 창의적 파트너로 바라봅니다. 기획 의도에 맞는 프롬프트 설계와 시각적 완성도를 높이는 편집 과정을 통해 나만의 작업 스타일을 구축하는 것을 목표로 합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. PROJECT (프로젝트 갤러리)
+         [이미지 교체 가이드]
+         - GitHub Pages 업로드 시 아래 각 프로젝트의 <img> 태그 내 src 경로에
+           실제 이미지 파일 경로(예: images/croissant-poster.jpg)를 입력하면 됩니다.
+         - 이미지가 로드되기 전이나 경로가 비어있을 때는 깔끔한 안내 영역이 표시되며,
+           '로컬 이미지 미리보기' 버튼으로 브라우저에서 즉시 사진을 테스트할 수 있습니다.
+         ====================================================================== -->
+    <section id="project" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-index">02 / Project</span>
+          <h2 class="section-title">프로젝트 갤러리</h2>
+        </div>
+
+        <div class="project-list" id="projectList">
+          <!-- PROJECT 01: 크루아상 포스터 -->
+          <article class="project-item">
+            <div class="project-media" data-project="1">
+              <!-- 실제 파일 연결 시 src="images/project-01.jpg" 형태로 경로만 수정하세요 -->
+              <img 
+                src="images/croissant-poster.jpg" 
+                alt="크루아상 포스터 작업물" 
+                class="project-img"
+                onerror="handleImageFallback(this)"
+              >
+              <div class="project-placeholder" style="display: none;">
+                <span class="project-placeholder-label">PROJECT 01 작품 이미지 영역</span>
+                <span class="project-placeholder-path">images/croissant-poster.jpg</span>
+                <input type="file" accept="image/*" class="hidden-file-input" style="display: none;" onchange="previewLocalImage(this)">
+                <button type="button" class="preview-upload-btn" onclick="triggerFileInput(this)">사진 파일 선택하여 미리보기</button>
+              </div>
+            </div>
+
+            <div class="project-info">
+              <span class="project-num">PROJECT 01</span>
+              <h3 class="project-title">크루아상 포스터</h3>
+              <p class="project-desc">
+                크루아상을 주제로 제작한 포스터 결과물입니다. 질감과 형태가 돋보이도록 구도를 설정하고, 시각적 집중도를 높이는 방향으로 작업했습니다.
+              </p>
+              <span class="editable-hint">※ 작품의 상세 기획 의도나 추가 설명을 이곳에 입력할 수 있습니다.</span>
+
+              <div class="project-meta">
+                <span class="project-meta-label">사용한 AI 도구</span>
+                <div class="tool-tags">
+                  <!-- 실제 사용한 AI 도구명으로 자유롭게 수정하세요 -->
+                  <span class="tool-tag">AI 도구명 입력</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 02: 디저트 전시 -->
+          <article class="project-item">
+            <div class="project-media" data-project="2">
+              <!-- 실제 파일 연결 시 src="images/dessert-exhibition.jpg" 형태로 경로만 수정하세요 -->
+              <img 
+                src="images/dessert-exhibition.jpg" 
+                alt="디저트 전시 작업물" 
+                class="project-img"
+                onerror="handleImageFallback(this)"
+              >
+              <div class="project-placeholder" style="display: none;">
+                <span class="project-placeholder-label">PROJECT 02 전시 사진 영역</span>
+                <span class="project-placeholder-path">images/dessert-exhibition.jpg</span>
+                <input type="file" accept="image/*" class="hidden-file-input" style="display: none;" onchange="previewLocalImage(this)">
+                <button type="button" class="preview-upload-btn" onclick="triggerFileInput(this)">사진 파일 선택하여 미리보기</button>
+              </div>
+            </div>
+
+            <div class="project-info">
+              <span class="project-num">PROJECT 02</span>
+              <h3 class="project-title">디저트 전시</h3>
+              <p class="project-desc">
+                디저트 전시회와 관련하여 촬영한 사진 및 결과물입니다. 전시 공간의 분위기와 디저트 오브제의 특징이 자연스럽게 어우러지도록 구성했습니다.
+              </p>
+              <span class="editable-hint">※ 전시의 주제나 작업 과정에 대한 설명을 이곳에 추가할 수 있습니다.</span>
+
+              <div class="project-meta">
+                <span class="project-meta-label">사용한 AI 도구</span>
+                <div class="tool-tags">
+                  <!-- 실제 사용한 AI 도구명으로 자유롭게 수정하세요 -->
+                  <span class="tool-tag">AI 도구명 입력</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ================================================================
+               [프로젝트 확장 가이드]
+               새로운 프로젝트를 추가할 때는 위의 <article class="project-item"> 블록을
+               복사하여 아래에 붙여넣고 번호, 제목, 이미지 경로, 설명만 수정하면 됩니다.
+               ================================================================ -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. SKILLS (활용 기술)
+         - 확인되지 않은 도구는 임의로 단정 짓지 않고, 실제 사용한 도구를 정리할 수 있는 카드 구조 제공
+         ====================================================================== -->
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-index">03 / Skills</span>
+          <h2 class="section-title">활용 기술 및 AI 도구</h2>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card">
+            <span class="skill-category">Image Generation</span>
+            <h3 class="skill-name">이미지 생성 AI 도구</h3>
+            <p class="skill-desc">
+              프롬프트 구성을 통해 작업 콘셉트에 맞는 시각 이미지를 생성하고, 다양한 스타일과 구도를 실험하는 데 활용합니다.
+            </p>
+            <span class="editable-hint">예: Midjourney, Firefly 등 실제 사용한 도구명 기재</span>
+          </div>
+
+          <div class="skill-card">
+            <span class="skill-category">Ideation & Text</span>
+            <h3 class="skill-name">기획 및 텍스트 AI 도구</h3>
+            <p class="skill-desc">
+              프로젝트 주제를 구체화하고, 작품 설명 문구 및 기획 아이디어를 체계적으로 정리하는 과정에서 활용합니다.
+            </p>
+            <span class="editable-hint">예: ChatGPT, Claude 등 실제 사용한 도구명 기재</span>
+          </div>
+
+          <div class="skill-card">
+            <span class="skill-category">Visual Editing</span>
+            <h3 class="skill-name">시각 편집 및 후반 작업</h3>
+            <p class="skill-desc">
+              생성된 결과물과 직접 촬영한 사진의 색감, 레이아웃, 타이포그래피를 정돈하여 완성도 높은 포스터와 전시 자료로 마무리합니다.
+            </p>
+            <span class="editable-hint">실제 사용한 편집 툴이 있다면 함께 기재해 주세요</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. CONTACT (연락처)
+         - 개인정보 보호를 위해 임의 연락처를 생성하지 않고 추후 입력 가능한 영역으로 구성
+         ====================================================================== -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-index">04 / Contact</span>
+          <h2 class="section-title">연락처</h2>
+        </div>
+
+        <div class="contact-wrapper">
+          <div>
+            <p class="contact-intro">
+              작업에 대한 문의나 의견이 있으시다면 아래 연락처를 통해 편하게 말씀해 주세요.
+            </p>
+          </div>
+
+          <div class="contact-list">
+            <div class="contact-row">
+              <span class="contact-label">NAME</span>
+              <span class="contact-value">표승연</span>
+            </div>
+
+            <div class="contact-row">
+              <span class="contact-label">EMAIL</span>
+              <!-- 추후 이메일 주소를 입력할 영역입니다 -->
+              <span class="contact-value contact-empty" id="contactEmail">이메일 주소 입력 예정</span>
+            </div>
+
+            <div class="contact-row">
+              <span class="contact-label">PHONE</span>
+              <!-- 추후 연락처를 입력할 영역입니다 -->
+              <span class="contact-value contact-empty" id="contactPhone">연락처 입력 예정</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>&copy; <span id="currentYear"></span> Pyo Seungyeon. All rights reserved.</span>
+      <span>Portfolio Website</span>
+    </div>
+  </footer>
+
+  <!-- 알림 메시지 토스트 -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       JAVASCRIPT (내부 스크립트 - 외부 라이브러리 미사용)
+       ======================================================================== -->
+  <script>
+    // 1. 현재 연도 자동 표시
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // 2. 토스트 알림 메시지 함수 (alert 대체)
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2800);
+    }
+
+    // 3. 이미지 로드 실패(아직 실제 이미지 파일을 넣지 않은 경우) 시 플레이스홀더 표시
+    function handleImageFallback(imgElement) {
+      imgElement.style.display = 'none';
+      const placeholder = imgElement.nextElementSibling;
+      if (placeholder && placeholder.classList.contains('project-placeholder')) {
+        placeholder.style.display = 'flex';
+      }
+    }
+
+    // 4. 로컬 이미지 선택 및 즉시 미리보기 기능 (사진 교체 전 화면 배치 확인용)
+    function triggerFileInput(buttonElement) {
+      const fileInput = buttonElement.previousElementSibling;
+      if (fileInput) {
+        fileInput.click();
+      }
+    }
+
+    function previewLocalImage(inputElement) {
+      const file = inputElement.files && inputElement.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const placeholder = inputElement.closest('.project-placeholder');
+        const mediaBox = inputElement.closest('.project-media');
+        const imgElement = mediaBox.querySelector('.project-img');
+
+        if (imgElement && placeholder) {
+          imgElement.src = e.target.result;
+          imgElement.style.display = 'block';
+          placeholder.style.display = 'none';
+          showToast('선택한 사진이 미리보기로 적용되었습니다.');
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // 5. 모바일 내비게이션 토글 및 메뉴 클릭 시 자동 닫힘
+    const menuToggle = document.getElementById('menuToggle');
+    const navList = document.getElementById('navList');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    menuToggle.addEventListener('click', () => {
+      navList.classList.toggle('open');
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        navList.classList.remove('open');
+      });
+    });
+
+    // 6. 스크롤 위치에 따른 활성 메뉴 하이라이트
+    const sections = document.querySelectorAll('section[id]');
+
+    function updateActiveNav() {
+      const scrollPos = window.scrollY + 140;
+
+      sections.forEach((section) => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPos >= top && scrollPos < top + height) {
+          navLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+  </script>
+</body>
+</html>
